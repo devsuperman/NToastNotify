@@ -36,11 +36,11 @@ namespace NToastNotify
                 {
                     var accessControlExposeHeaders = $"{GetControlExposeHeaders(httpContext.Response.Headers)}";
                     _logger.LogInformation($"Setting response header {AccessControlExposeHeadersKey} with {accessControlExposeHeaders}");
-                    httpContext.Response.Headers.Add(AccessControlExposeHeadersKey, accessControlExposeHeaders);
+                    httpContext.Response.Headers.Append(AccessControlExposeHeadersKey, accessControlExposeHeaders);
 
                     var messagesJson = messages.ToJson();
                     _logger.LogInformation($"Setting response header {Constants.ResponseHeaderKey} with {messagesJson}");
-                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, WebUtility.UrlEncode(messagesJson));
+                    httpContext.Response.Headers.Append(Constants.ResponseHeaderKey, WebUtility.UrlEncode(messagesJson));
                 }
             }
             return Task.FromResult(0);
